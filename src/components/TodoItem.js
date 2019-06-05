@@ -21,8 +21,9 @@ class TodoItem extends React.Component {
         return (
             <div style={this.getStyle()}>
                 <p>
-                    <input type="checkbox" onChange={ this.props.markComplete.bind(this, id) } />
-                    { title }
+                    <input type="checkbox" onChange={this.props.markComplete.bind(this, id)} />
+                    {title}
+                    <button style={btnStyle} onClick={this.props.delTodo.bind(this, id)}>x</button>
                 </p>
             </div>
         )
@@ -31,6 +32,17 @@ class TodoItem extends React.Component {
 
 TodoItem.propTypes = {
     todo: PropTypes.object.isRequired
+}
+
+// might wanna add font-awesome here
+const btnStyle = {
+    background: '#f33',
+    color: 'white',
+    padding: '2px 5px',
+    border: 'none',
+    cursor: 'pointer',
+    borderRadius: '30%',
+    float: 'right'
 }
 
 export default TodoItem;
