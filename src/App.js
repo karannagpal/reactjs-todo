@@ -1,30 +1,23 @@
 import React from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Header from './components/layout/Header'
 import Todos from './components/Todos';
 import AddTodo from './components/AddTodo';
-import uuid from 'uuid';
+import About from './components/pages/About';
+import axios from 'axios';
 
 import './App.css';
 
+
 class App extends React.Component {
     state = {
-        todos: [
-            {
-                id: uuid.v4(),
-                title: 'Take out trash',
-                completed: false
-            },
-            {
-                id: uuid.v4(),
-                title: 'Dinner with wife',
-                completed: false
-            },
-            {
-                id: uuid.v4(),
-                title: 'Meeting with boss',
-                completed: false
-            }
-        ]
+        todos: []
+    }
+
+    // runs as soon as the component mounts onto DOM
+    componentDidMount() {
+        axios.get('https://jsonplaceholder.typicode.com/todos?_limit=8')
+            .then(res => this.setState({ todos: res.data }))
     }
 
     // toggle complete
@@ -41,34 +34,40 @@ class App extends React.Component {
 
     // deleting that todo
     delTodo = (id) => {
-        this.setState({
+        axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`).then(res => this.setState({
             // basically returning all todos whose ids don't match
             todos: [...this.state.todos.filter(todo => todo.id !== id)]
             // triple dot id spread operator
-        })
+        }));
     }
 
     // add todo
     addTodo = (title) => {
-        const newTodo = {
-            id: uuid.v4(),
+        // this wont alter the server's data but would still send a signal when promise is resolved
+        axios.post('https://jsonplaceholder.typicode.com/todos', {
             title: title,
             completed: false
-        }
-        if (title) {
-            this.setState({ todos: [...this.state.todos, newTodo] })
-        }
-
+        }).then(res => {
+            this.setState({ todos: [...this.state.todos, res.data] })
+        })
     }
 
 
     render() {
         return (
-            <div className="App">
-                <Header></Header>
-                <AddTodo addTodo={this.addTodo}></AddTodo>
-                <Todos todos={this.state.todos} markComplete={this.markComplete} delTodo={this.delTodo}></Todos>
-            </div>
+            <Router>
+                <div className="App">
+                    <Header></Header>
+                    <Route exact path="/" render={props => (
+                        <React.Fragment>
+                            <AddTodo addTodo={this.addTodo}></AddTodo>
+                            <Todos todos={this.state.todos} markComplete={this.markComplete} delTodo={this.delTodo}></Todos>
+                        </React.Fragment>
+                    )}></Route>
+
+                    <Route path="/about" component={About}></Route>
+                </div>
+            </Router>
         );
     }
 }

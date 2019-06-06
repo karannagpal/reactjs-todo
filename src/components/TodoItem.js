@@ -31,8 +31,11 @@ class TodoItem extends React.Component {
 }
 
 TodoItem.propTypes = {
-    todo: PropTypes.object.isRequired
+    todos: PropTypes.array.isRequired,
+    markComplete: PropTypes.func.isRequired,
+    delTodo: PropTypes.func.isRequired
 }
+
 
 // might wanna add font-awesome here
 const btnStyle = {

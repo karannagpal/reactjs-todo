@@ -3,6 +3,16 @@
 ## Guidance for this project:
 Traversy Media (YouTube channel)
 
+## main packages used:
+- uuid
+generates a new random id everytime its function `uuid.v4()` is called
+
+- axios
+used to get/post request to backend
+
+
+========================
+
 ## Other information:
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
