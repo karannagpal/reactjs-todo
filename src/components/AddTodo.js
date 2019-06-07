@@ -17,17 +17,18 @@ class AddTodo extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.onSubmit} style={{ display: 'flex' }}>
+            <form onSubmit={this.onSubmit} style={{ display: 'flex' }} className="mb-1 form-inline">
                 <input
                     type="text"
                     name="title"
                     style={{ flex: '10', padding: '5px' }}
-                    placeholder="Add Todo ..."
+                    placeholder="Add a ToDo..."
                     value={this.state.title}
                     onChange={this.onChange}
+                    className="col-md-10 pr-1 form-control"
                 ></input>
 
-                <input type="submit" value="submit" className="btn" style={{ flex: '1' }}></input>
+                <input type="submit" value="submit" className="col-md-2 btn btn-info m-1 form-control" style={{ flex: '1' }} ></input>
             </form>
         )
     }

@@ -16,7 +16,7 @@ class App extends React.Component {
 
     // runs as soon as the component mounts onto DOM
     componentDidMount() {
-        axios.get('https://jsonplaceholder.typicode.com/todos?_limit=8')
+        axios.get('https://jsonplaceholder.typicode.com/todos?_limit=2')
             .then(res => this.setState({ todos: res.data }))
     }
 
@@ -56,12 +56,12 @@ class App extends React.Component {
     render() {
         return (
             <Router>
-                <div className="App">
-                    <Header></Header>
+                <div className="App container">
+                    <Header className="jumbotron"></Header>
                     <Route exact path="/" render={props => (
-                        <React.Fragment>
-                            <AddTodo addTodo={this.addTodo}></AddTodo>
-                            <Todos todos={this.state.todos} markComplete={this.markComplete} delTodo={this.delTodo}></Todos>
+                        <React.Fragment className="row">
+                            <AddTodo className="col-md-12" addTodo={this.addTodo}></AddTodo>
+                            <Todos className="col-md-12" todos={this.state.todos} markComplete={this.markComplete} delTodo={this.delTodo}></Todos>
                         </React.Fragment>
                     )}></Route>
 

@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 // incase of function components, there's only one return, no render
 function Header() {
     return (
-        <header style={headerStyle}>
-            <h1>ToDo list</h1>
+        <header style={headerStyle} className="p-4 mb-1">
+            <h1 className="display-3">ToDo list</h1>
             <Link style={linkStyle} to="/">Home</Link> | <Link style={linkStyle} to="/about">About</Link>
         </header>
     )
@@ -14,8 +14,7 @@ function Header() {
 const headerStyle = {
     background: '#333',
     color: '#fff',
-    textAlign: 'center',
-    padding: '10px'
+    textAlign: 'center'
 }
 
 const linkStyle = {
